@@ -1,10 +1,9 @@
-import conf from '../conf.js';
-
+import conf from "../conf/conf";
 import { Client,  ID  , Databases , Storage , Query} from "appwrite";
 
 export class Service{
     client = new Client();
-    Databases;
+    databases;
     bucket;
     constructor(){
         this.client
@@ -31,7 +30,7 @@ export class Service{
                     )
                     
                 } catch (error) {
-                    console.log("appwrite serive :: createPost :: error" , error);
+                    console.log("Appwrite serive :: createPost :: error" , error);
                     
                 }
             } 
@@ -49,7 +48,7 @@ export class Service{
                         }
                     )
                 } catch (error) {
-                console.log("appwrite serive :: updatePost :: error" , error);
+                console.log("Appwrite serive :: updatePost :: error" , error);
                     
          
                 }
@@ -57,7 +56,7 @@ export class Service{
             }
     async deletePost(slug){
         try {
-            return await this.databases.deleteDocument(
+             await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -65,7 +64,7 @@ export class Service{
             )
             return true
         } catch (error) {
-            console.log("appwrite serive :: deletePost :: error", error);
+            console.log("Appwrite serive :: deletePost :: error", error);
             return false
         }
     }
@@ -92,7 +91,7 @@ export class Service{
                
             )
         } catch (error) {
-           console.log("appwrite serive :: getPosts :: error" , error);
+           console.log("Appwrite serive :: getPosts :: error" , error);
             return false
         }
     }
@@ -112,7 +111,7 @@ export class Service{
         }
     }
 
-    async deleteFile (fileId){
+    async deleteFile(fileId){
         try {
             await this.bucket.deleteFile(
                 conf.appwriteBucketId,
@@ -135,4 +134,4 @@ export class Service{
 }
 
 const service = new Service()
-export  default Service
+export  default service
